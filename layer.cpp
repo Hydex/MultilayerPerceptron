@@ -59,3 +59,16 @@ Neuron* Layer::GetNeuron(const unsigned int index) const {
 unsigned int Layer::NeuronsCount() {
     return num_neurons_;
 }
+
+void Layer::RndWeights() {
+    for (unsigned int i = 0; i < num_neurons_; ++i ) {
+        neurons_[i]->RndWeights();
+    }
+}
+
+void Layer::ResetWeights() {
+    for (unsigned int i = 0; i < num_neurons_; ++i ) {
+        neurons_[i]->ResetWeights();
+    }
+}
+

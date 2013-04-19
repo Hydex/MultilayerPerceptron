@@ -16,6 +16,10 @@ public:
     double* GetOutput();
     Neuron* GetNeuron(const unsigned int index) const;
     unsigned int NeuronsCount();
+    /// Заполнение весовых коэфф. случайными числами всех нейронов слоя
+    void RndWeights();
+    /// Обнуление весовых коэффициентов всех нейронов слоя
+    void ResetWeights();
 
 
 

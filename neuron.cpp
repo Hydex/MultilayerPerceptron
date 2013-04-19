@@ -63,7 +63,7 @@ void Neuron::ResetWeights() {
 
 void Neuron::CalcWeightedSum() {
     weighted_sum_ = 0.0;
-    for (int i = 0; i < num_inputs_; ++i) {
+    for (unsigned int i = 0; i < num_inputs_; ++i) {
         weighted_sum_ += inputs_[i] * weights_[i];
     }
 }
@@ -83,6 +83,7 @@ double Neuron::GetOutput() const {
 
 double Neuron::GetDerivative() const{
     double derivative = activation_function_->GetDerivative(weighted_sum_);
+    return derivative;
 }
 
 unsigned int Neuron::InputSize() {

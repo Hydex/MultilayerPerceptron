@@ -7,7 +7,7 @@
 using namespace std;
 
 
-void test() {
+/*void test() {
     double vals[] = {1.0,2.0,3.0,4.0};
     Layer *l1 = new Layer(4,4);
     l1->SetInput(vals);
@@ -39,11 +39,11 @@ void test() {
     }
     delete l1;
     delete l2;
-}
+}*/
 
 int main()
 {
-    test();
+
     return 0;
 }
 
