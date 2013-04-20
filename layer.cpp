@@ -39,7 +39,7 @@ void Layer::SetInput(double *input_array) {
     input_values_ = input_array;
 }
 
-void Layer::ForwardCalculate() {
+void Layer::CalcOutput() {
     for (unsigned int i = 0; i < num_neurons_; ++i) {
         neurons_[i]->SetInputs(input_values_);
         neurons_[i]->Process();
@@ -50,7 +50,6 @@ void Layer::ForwardCalculate() {
 double* Layer::GetOutput() {
     return output_values_;
 }
-
 
 Neuron* Layer::GetNeuron(const unsigned int index) const {
     return neurons_[index];
@@ -70,5 +69,33 @@ void Layer::ResetWeights() {
     for (unsigned int i = 0; i < num_neurons_; ++i ) {
         neurons_[i]->ResetWeights();
     }
+}
+
+void Layer::ResetWeightDiffs() {
+    for (unsigned int i = 0; i < num_neurons_; ++i ) {
+        neurons_[i]->ResetWeightDiffs();
+    }
+}
+
+void Layer::CalcDeltas(double delta_coeff) {
+    for (unsigned int neuro_num = 0; neuro_num < num_neurons_; ++neuro_num) {
+        neurons_[neuro_num]->CalcDelta(delta_coeff);
+    }
+}
+
+void Layer::UpdateWeights() {
+    for (unsigned int neuro_num = 0; neuro_num < num_neurons_; ++neuro_num) {
+        neurons_[neuro_num]->UpdateWeights();
+    }
+}
+
+double Layer::GetDeltaCoeff(unsigned int index) const {
+    double delta_coeff = 0.0;
+    Neuron* curr_neuron;
+    for (unsigned int neuro_num = 0; neuro_num < num_neurons_; ++neuro_num) {
+        curr_neuron = neurons_[neuro_num];
+        delta_coeff += curr_neuron->delta_ * curr_neuron->GetWeight(index);
+    }
+    return delta_coeff;
 }
 
